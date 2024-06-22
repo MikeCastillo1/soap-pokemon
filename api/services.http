@@ -1,0 +1,14 @@
+### TEST sample
+POST localhost:8080/ws
+content-type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+				  xmlns:pk="http://pokemon.com/pkm">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pk:getPokemonRequest>
+         <pk:name>pikachu</pk:name>
+      </pk:getPokemonRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+

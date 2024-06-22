@@ -1,0 +1,93 @@
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+
+        xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+        jaxb:version="3.0"
+        xmlns:annox="urn:jaxb.jvnet.org:annox"
+        jaxb:extensionBindingPrefixes="annox"
+
+        xmlns:pkm="http://pokemon.com/pkm"
+        targetNamespace="http://pokemon.com/pkm"
+        elementFormDefault="qualified">
+
+    <xs:element name="getPokemonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPokemonResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pokemon" type="pkm:Pokemon"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<!--   Types definitions -->
+    <xs:complexType name="Pokemon">
+        <xs:sequence>
+            <xs:element name="abilities" type="pkm:PokemonAbility" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="baseExperience" type="xs:string">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <annox:annotate target="field">@com.fasterxml.jackson.annotation.JsonProperty("base_experience")</annox:annotate>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="heldItems" type="pkm:PokemonHeldItem" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <annox:annotate target="field">@com.fasterxml.jackson.annotation.JsonProperty("held_items")</annox:annotate>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PokemonAbility">
+            <xs:sequence>
+                <xs:element name="ability" type="pkm:NamedApiResource"/>
+                <xs:element name="isHidden" type="xs:boolean">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <annox:annotate target="field">@com.fasterxml.jackson.annotation.JsonProperty("is_hidden")</annox:annotate>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="slot" type="xs:int"/>
+            </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PokemonHeldItem">
+        <xs:sequence>
+            <xs:element name="item" type="pkm:NamedApiResource"/>
+            <xs:element name="versionDetails" type="pkm:PokemonHeldItemVersion" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <annox:annotate target="field">@com.fasterxml.jackson.annotation.JsonProperty("version_details")</annox:annotate>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PokemonHeldItemVersion">
+        <xs:sequence>
+            <xs:element name="rarity" type="xs:int"/>
+            <xs:element name="version" type="pkm:NamedApiResource"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NamedApiResource">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="url" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
