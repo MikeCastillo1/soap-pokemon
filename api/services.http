@@ -1,3 +1,17 @@
+### GET pokemon by name NOT_FOUND
+POST localhost:8080/ws
+content-type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:pk="http://pokemon.com/pkm">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <pk:getPokemonByNameRequest>
+            <pk:name>sds</pk:name>
+        </pk:getPokemonByNameRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+
 ### GET pokemon by name
 POST localhost:8080/ws
 content-type: text/xml

@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -21,10 +22,11 @@ public class PokeApiClient {
     @PostConstruct
     public void postConstruct(){
         restClient = RestClient.builder()
-                .baseUrl(pokeApi).build();
+                .baseUrl(pokeApi)
+                .build();
     }
 
-    public ResponseEntity<Pokemon> getAbilitiesByName(String pokemonName){
+    public ResponseEntity<Pokemon> getPokemon(String pokemonName){
         logger.info("CALLING POKE API");
         ResponseEntity<Pokemon> response =
                 restClient
@@ -33,6 +35,7 @@ public class PokeApiClient {
                         .pathSegment("pokemon")
                         .pathSegment(pokemonName).build())
                 .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, (req, res) -> {throw new PokemonNotFoundException(pokemonName);})
                 .toEntity(Pokemon.class);
        return response;
     }

@@ -30,7 +30,7 @@ public class PokemonEndPoint {
 
         String name = request.getName();
         GetPokemonResponse response = new GetPokemonResponse();
-        ResponseEntity<Pokemon> pokemonResponse = pokeApiClient.getAbilitiesByName(name);
+        ResponseEntity<Pokemon> pokemonResponse = pokeApiClient.getPokemon(name);
         response.setPokemon(pokemonResponse.getBody());
 
         return response;
@@ -43,7 +43,7 @@ public class PokemonEndPoint {
 
         String name = request.getName();
         GetPokemonAbilitiesResponse response = new GetPokemonAbilitiesResponse();
-        ResponseEntity<Pokemon> pokemonResponse = pokeApiClient.getAbilitiesByName(name);
+        ResponseEntity<Pokemon> pokemonResponse = pokeApiClient.getPokemon(name);
         response.getAbilities().addAll(pokemonResponse.getBody().getAbilities());
 
         return response;
@@ -56,7 +56,7 @@ public class PokemonEndPoint {
 
         String name = request.getName();
         GetPokemonBaseExperienceResponse response = new GetPokemonBaseExperienceResponse();
-        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getAbilitiesByName(name);
+        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getPokemon(name);
         response.setBaseExperience(responsePokemon.getBody().getBaseExperience());
 
         return response;
@@ -69,7 +69,7 @@ public class PokemonEndPoint {
 
         String name = request.getName();
         GetPokemonHeldItemsResponse response = new GetPokemonHeldItemsResponse();
-        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getAbilitiesByName(name);
+        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getPokemon(name);
         response.getHeldItems().addAll(responsePokemon.getBody().getHeldItems());
 
         return response;
@@ -82,7 +82,7 @@ public class PokemonEndPoint {
 
         String name = request.getName();
         GetPokemonIdResponse response = new GetPokemonIdResponse();
-        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getAbilitiesByName(name);
+        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getPokemon(name);
         response.setId(responsePokemon.getBody().getId());
 
         return response;
@@ -95,7 +95,7 @@ public class PokemonEndPoint {
 
         String name = request.getName();
         GetPokemonLocationAreaEncountersResponse response = new GetPokemonLocationAreaEncountersResponse();
-        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getAbilitiesByName(name);
+        ResponseEntity<Pokemon> responsePokemon = pokeApiClient.getPokemon(name);
         response.setLocationAreaEncounters(responsePokemon.getBody().getLocationAreaEncounters());
 
         return response;

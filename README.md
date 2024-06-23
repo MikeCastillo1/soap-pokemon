@@ -20,6 +20,8 @@ This projects uses java 21, please install the java 21 jdk, you can use [SDK](ht
     Then go the table API_REQUEST_LOG, and use this query
    `SELECT * FROM API_REQUEST_LOG`
     
+It was a added an integration test for only one method, you can check on PokemonEndpointTest
+
 
 
 
