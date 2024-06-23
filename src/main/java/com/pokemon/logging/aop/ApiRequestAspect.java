@@ -30,6 +30,7 @@ public class ApiRequestAspect {
     @Transactional
     @Before("execution(* com.pokemon.soap.endpoint.PokemonEndPoint.*(..))")
     public void apiRequest(JoinPoint joinPoint) {
+        logger.info("LOGGING API REQUEST");
         TransportContext context = TransportContextHolder.getTransportContext();
         HttpServletConnection connection = (HttpServletConnection )context.getConnection();
         HttpServletRequest request1 = connection.getHttpServletRequest();

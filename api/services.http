@@ -1,4 +1,4 @@
-### TEST sample
+### GET pokemon by name
 POST localhost:8080/ws
 content-type: text/xml
 
@@ -6,9 +6,80 @@ content-type: text/xml
 				  xmlns:pk="http://pokemon.com/pkm">
    <soapenv:Header/>
    <soapenv:Body>
-      <pk:getPokemonRequest>
+      <pk:getPokemonByNameRequest>
          <pk:name>pikachu</pk:name>
-      </pk:getPokemonRequest>
+      </pk:getPokemonByNameRequest>
    </soapenv:Body>
+</soapenv:Envelope>
+
+### GET pokemon abilities by name
+POST localhost:8080/ws
+content-type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:pk="http://pokemon.com/pkm">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <pk:getPokemonAbilitiesByNameRequest>
+            <pk:name>pikachu</pk:name>
+        </pk:getPokemonAbilitiesByNameRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+### GET pokemon base experience by name
+POST localhost:8080/ws
+content-type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:pk="http://pokemon.com/pkm">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <pk:getPokemonBaseExperienceByNameRequest>
+            <pk:name>pikachu</pk:name>
+        </pk:getPokemonBaseExperienceByNameRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+### GET pokemon held items by name
+POST localhost:8080/ws
+content-type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:pk="http://pokemon.com/pkm">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <pk:getPokemonHeldItemsByNameRequest>
+            <pk:name>pikachu</pk:name>
+        </pk:getPokemonHeldItemsByNameRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+### GET pokemon Id by name
+POST localhost:8080/ws
+content-type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:pk="http://pokemon.com/pkm">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <pk:getPokemonIdByNameRequest>
+            <pk:name>pikachu</pk:name>
+        </pk:getPokemonIdByNameRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+### GET pokemon location area encounters by name
+POST localhost:8080/ws
+content-type: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:pk="http://pokemon.com/pkm">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <pk:getPokemonLocationAreaEncountersByNameRequest>
+            <pk:name>pikachu</pk:name>
+        </pk:getPokemonLocationAreaEncountersByNameRequest>
+    </soapenv:Body>
 </soapenv:Envelope>
 

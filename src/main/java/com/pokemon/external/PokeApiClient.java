@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.net.URI;
-
 @Service
 public class PokeApiClient {
     private static final Logger logger = LoggerFactory.getLogger(PokeApiClient.class);
@@ -27,16 +25,13 @@ public class PokeApiClient {
     }
 
     public ResponseEntity<Pokemon> getAbilitiesByName(String pokemonName){
-        logger.info("POKEAPI --------------------");
+        logger.info("CALLING POKE API");
         ResponseEntity<Pokemon> response =
                 restClient
                 .get()
-                .uri(uriBuilder -> {
-                    URI ability = uriBuilder.pathSegment("pokemon")
-                            .pathSegment(pokemonName).build();
-                    logger.info(ability.toString());
-                    return ability;
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .pathSegment("pokemon")
+                        .pathSegment(pokemonName).build())
                 .retrieve()
                 .toEntity(Pokemon.class);
        return response;
