@@ -7,8 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
+import java.time.Duration;
 
 @Service
 public class PokeApiClient {
@@ -16,14 +19,23 @@ public class PokeApiClient {
 
     @Value("${pokeapi.url}")
     private String pokeApi;
+    @Value("${pokeapi.connect-timeout}")
+    private Long connectionTimeout;
+    @Value("${pokeapi.read-timeout}")
+    private Long readTimeout;
 
     private RestClient restClient;
 
     @PostConstruct
     public void postConstruct(){
+        SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+        simpleClientHttpRequestFactory.setConnectTimeout(Duration.ofSeconds(connectionTimeout));
+        simpleClientHttpRequestFactory.setReadTimeout(Duration.ofSeconds(readTimeout));
         restClient = RestClient.builder()
+                .requestFactory(simpleClientHttpRequestFactory)
                 .baseUrl(pokeApi)
                 .build();
+
     }
 
     public ResponseEntity<Pokemon> getPokemon(String pokemonName){
@@ -36,6 +48,7 @@ public class PokeApiClient {
                         .pathSegment(pokemonName).build())
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (req, res) -> {throw new PokemonNotFoundException(pokemonName);})
+                .onStatus(HttpStatusCode::is5xxServerError, (req, res) -> {throw new PokemonServerError();})
                 .toEntity(Pokemon.class);
        return response;
     }
